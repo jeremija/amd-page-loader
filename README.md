@@ -6,7 +6,7 @@ An AMD module for loading pages in a single page WEB application using jQuery.
 
     bower install amd-page-loader
 
-Currently `requirejs` is listed as a dependency but any AMD loader should do.
+Currently `requirejs` is listed as a dependency, but any AMD loader should do.
 
 #Usage
 
