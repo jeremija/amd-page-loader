@@ -25,7 +25,8 @@ define(['amd-page-loader'], function(PageLoader) {
 		jsPrefix: '../../js/pages'
 	});
 
-
+	// load 'js/pages/page-name.html' relative to the current location in the address bar
+	// load '../../js/pages/page-name.js' relative to the AMD loader's base url
 	loader.load('page-name')
 		.success(function(module, element, expired) {
 			// `module` is a reference to the object exported by the script
