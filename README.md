@@ -19,6 +19,7 @@ There is a convention that must be followed: both the page template filename and
 define(['amd-page-loader'], function(PageLoader) {
 
 	var loader = PageLoader.init({
+		// `selector` defines the element to which the loaded pages will be appended
 		selector: '#pages',
 		htmlPrefix: 'js/pages',
 		jsPrefix: '../../js/pages'
@@ -31,11 +32,10 @@ define(['amd-page-loader'], function(PageLoader) {
 
 			// `element` is a reference to the DOM element imported in the element defined by `selector`
 
-			// `expired` is a boolean which defines whether or not another
-			// load request was placed after the current one
+			// `expired` is a boolean which defines whether or not another load request was placed after the current one
 		})
 		.fail(function(err) {
-			// handle the error
+			// error handler
 		});
 });
 ```
