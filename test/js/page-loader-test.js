@@ -102,10 +102,7 @@ define(['page-loader', 'jquery'], function(PageLoader, $) {
             });
         });
         describe('load() expired', function() {
-            it('should clear the #pages div', function() {
-                $('#pages').html('');
-            });
-            it('should call only one callback', function(done) {
+            it('should have the expired variable set to true', function(done) {
                 // override the _checkExpired
                 loader._checkExpired = function() {
                     return true;
