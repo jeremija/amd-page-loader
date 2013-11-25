@@ -10,7 +10,7 @@ A javascript AMD module for loading page html and script pairs for a single page
 
 * [jQuery](http://jquery.com/)
 * [RequireJS](http://requirejs.org/)
-* [extendable.js](www.github.com/jeremija/extendable.js)
+* [extendable.js](http://www.github.com/jeremija/extendable.js)
 
 RequireJS is currently listed as a dependency, but any AMD loader should do.
 
