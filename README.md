@@ -5,8 +5,14 @@ An AMD module for loading pages in a single page WEB application using jQuery.
 #Install
 
     bower install amd-page-loader
+    
+#Dependencies
 
-Currently `requirejs` is listed as a dependency, but any AMD loader should do.
+* [jQuery](http://jquery.com/)
+* [RequireJS](http://requirejs.org/)
+* [extendable.js](www.github.com/jeremija/extendable.js)
+
+RequireJS is currently listed as a dependency, but any AMD loader should do.
 
 #Usage
 
@@ -14,25 +20,21 @@ You need to specify both the `htmlPrefix` and the `jsPrefix` in case the AMD mod
 
 There is a convention that must be followed: both the page template filename and the module (script) filename should have the same name, except the extension which is `.js` for the script file and `.html` for the page template. The page module should be an AMD module.
 
+##Code example
+
 ```javascript
-// initialize the page loader
 define(['amd-page-loader'], function(PageLoader) {
 
-	var loader = PageLoader.init({
-		// `selector` defines the element to which the loaded pages will be appended
+	var pageLoader = PageLoader.init({
 		selector: '#pages',
 		htmlPrefix: 'js/pages',
 		jsPrefix: '../../js/pages'
 	});
 
-	// load 'js/pages/page-name.html' relative to the current location in the address bar
-	// load '../../js/pages/page-name.js' relative to the AMD loader's base url
-	loader.load('page-name')
+	pageLoader.load('page-name')
 		.success(function(module, element, expired) {
 			// `module` is a reference to the object exported by the script
-
 			// `element` is a reference to the DOM element imported in the element defined by `selector`
-
 			// `expired` is a boolean which defines whether or not another load request was placed after the current one
 		})
 		.fail(function(err) {
@@ -40,6 +42,18 @@ define(['amd-page-loader'], function(PageLoader) {
 		});
 });
 ```
+
+##Explanation
+
+1. Use the `PageLoader.init(p_params)` to set the configuration. It will create a new instance of PageLoader.
+   * `p_params.selector` defines the element to append the html pages to,
+   * `p_params.htmlPrefix` defines the url prefix for the html templates, relative to the current url and
+   * `p_params.jsPrefix` defines the url prefix for the js templates, relative to the amd loader's base url.
+2. `pageLoader.load(p_page)` tries to load the page by name. In this sample, the final url strings will be:
+   * `js/pages/page-name.html` for the html page and
+   * `../../js/pages/page-name.js` for page's javascript module.
+3. `pageLoader.success(p_callback)` sets the function to be called if the page loading was successful.
+4. `pageLoader.fail(p_errback)` sets the function to be called if an error happened while loading the page
 
 #License
 
