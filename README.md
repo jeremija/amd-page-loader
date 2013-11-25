@@ -55,7 +55,7 @@ define(['amd-page-loader'], function(PageLoader) {
 3. `pageLoader.success(p_callback)` sets the function to be called if the page loading was successful,
 4. `pageLoader.fail(p_errback)` sets the function to be called if an error ocurred while loading the page.
 
-All public functions return the `this` variable so all function calls can be chained.
+All public functions return the current PageLoader instance so all function calls can be chained.
 
 #License
 
