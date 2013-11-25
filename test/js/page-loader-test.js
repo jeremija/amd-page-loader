@@ -52,7 +52,7 @@ define(['page-loader', 'jquery'], function(PageLoader, $) {
         var mod;
         describe('load() success', function() {
             it('should call the success callback', function(done) {
-                expect($('#test-page').length).to.be(0);
+                expect($('#page-test-page').length).to.be(0);
 
                 loader.load('test-page')
                     .success(function(module, el, expired) {
@@ -60,7 +60,7 @@ define(['page-loader', 'jquery'], function(PageLoader, $) {
                         expect(module.id).to.be('test-page');
                         expect(expired).to.be(false);
 
-                        var $testPage = $('#test-page');
+                        var $testPage = $('#page-test-page');
                         expect($testPage.length).to.be(1);
                         expect($testPage[0]).to.be(el);
 
@@ -78,7 +78,7 @@ define(['page-loader', 'jquery'], function(PageLoader, $) {
         });
         describe('load() already loaded', function() {
             it('should call the success callback', function(done) {
-                var $testPage = $('#test-page');
+                var $testPage = $('#page-test-page');
                 expect($testPage.length).to.be(1);
                 var testPageElement = $testPage[0];
 
@@ -89,7 +89,7 @@ define(['page-loader', 'jquery'], function(PageLoader, $) {
                         expect(module.initialized).to.be(true);
                         expect(expired).to.be(false);
 
-                        $testPage = $('#test-page');
+                        $testPage = $('#page-test-page');
                         expect($testPage.length).to.be(1);
                         expect($testPage[0]).to.be(testPageElement);
                         expect(el).to.be(testPageElement);
@@ -112,7 +112,7 @@ define(['page-loader', 'jquery'], function(PageLoader, $) {
                     .success(function(module, el, expired) {
                         expect(module).to.be.ok();
                         expect(module.id).to.be('test-page-two');
-                        expect($('#test-page-two').length).to.be(1);
+                        expect($('#page-test-page-two').length).to.be(1);
                         expect(expired).to.be(true);
                         // remove the override
                         delete loader._checkExpired;

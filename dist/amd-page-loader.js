@@ -10,6 +10,8 @@ define(['jquery', 'extendable'], function($, Extendable) {
          * @param {String} p_params.selector    Element selector.
          * @param {String} p_params.htmlPrefix  Default url prefix for html
          * @param {String} p_params.jsPrefix    Default url prefix for js
+         * @param {String} p_params.pagePrefix  Prefix for the element the
+         * html will be loaded to. Defaults to 'page-'
          * scripts. Use this if the requirejs url is not the same as the
          * relative url for loading the html.
          * @return {PageLoader}                 An instance of PageLoader
@@ -60,13 +62,10 @@ define(['jquery', 'extendable'], function($, Extendable) {
         load: function(p_path) {
             var timestamp = this.lastRequestTimestamp = new Date().getTime();
 
-            var htmlUrl = this.config.htmlPrefix ?
-                this.config.htmlPrefix + '/' + p_path: p_path;
-            htmlUrl += '.html';
-            var scriptUrl = this.config.jsPrefix ?
-                this.config.jsPrefix + '/' + p_path : p_path;
+            var htmlUrl = this._getHtmlUrl(p_path);
+            var scriptUrl = this._getScriptUrl(p_path);
 
-            var pageId = p_path.replace(/[^a-zA-Z\-]/g, '_');
+            var pageId = this._getPageId(p_path);
             var $page = this.$element.children('#' + pageId);
 
             if ($page.length) {
@@ -77,6 +76,20 @@ define(['jquery', 'extendable'], function($, Extendable) {
             }
 
             return this;
+        },
+        _getScriptUrl: function(p_path) {
+            return this.config.jsPrefix ?
+                this.config.jsPrefix + '/' + p_path : p_path;
+        },
+        _getHtmlUrl: function(p_path) {
+            var htmlUrl = this.config.htmlPrefix ?
+                this.config.htmlPrefix + '/' + p_path: p_path;
+            return htmlUrl + '.html';
+        },
+        _getPageId: function(p_path) {
+            var pagePrefix = this.config.pagePrefix || 'page-';
+            // replace all non-letters and non-numbers with an underscore
+            return pagePrefix + p_path.replace(/[^a-zA-Z0-9\-]/g, '_');
         },
         _checkExpired: function(p_timestamp) {
             // true if no other load request was placed after the current one.
