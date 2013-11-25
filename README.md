@@ -34,7 +34,7 @@ define(['amd-page-loader'], function(PageLoader) {
 	pageLoader.load('page-name')
 		.success(function(module, element, expired) {
 			// `module` is a reference to the object exported by the script
-			// `element` is a reference to the DOM element imported in the element defined by `selector`
+			// `element` is a reference to the DOM element appended to the element defined by `selector`
 			// `expired` is a boolean which defines whether or not another load request was placed after the current one
 		})
 		.fail(function(err) {
